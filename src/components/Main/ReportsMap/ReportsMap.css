@@ -1,0 +1,59 @@
+/* css for report map/popup below: */
+.reports-map-wrapper {
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid var(--color-border);
+  margin-bottom: 1.5rem;
+}
+
+.reports-map {
+  height: 420px;
+  width: 100%;
+}
+
+.map-popup {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  text-align: center;
+  min-width: 160px;
+  padding: 0.25rem;
+}
+
+.popup-image {
+  width: 120px;
+  height: 90px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.popup-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+}
+
+.popup-name {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--color-text);
+}
+
+.popup-type {
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: var(--color-primary);
+}
+
+.popup-link {
+  display: inline-block;
+  color: var(--color-light-orange);
+  text-decoration: none;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.popup-link:hover {
+  text-decoration: underline;
+}

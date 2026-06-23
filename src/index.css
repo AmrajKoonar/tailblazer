@@ -1,0 +1,48 @@
+:root {
+  --color-bg: #fff8f0;
+  --color-primary: #e8760a;
+  --color-primary-hover: #d06800;
+  --color-accent: #c45200;
+  --color-text: #3d2e1f;
+  --color-text-light: #6b5744;
+  --color-card-bg: #ffffff;
+  --color-border: #f0c8a0;
+  --color-light-orange: #ffe8cc;
+  --color-success: #2e7d32;
+  --color-error: #c62828;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+a {
+  color: var(--color-primary);
+}
+
+button {
+  cursor: pointer;
+  font-family: inherit;
+}
+
+input,
+select,
+textarea {
+  font-family: inherit;
+}

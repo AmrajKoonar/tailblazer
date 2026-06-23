@@ -1,0 +1,377 @@
+/* css for layout below: */
+
+.app-layout {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.main-content {
+  flex: 1;
+}
+
+/* css for shared page styles below: */
+
+.page-container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 1.5rem;
+}
+
+.page-title {
+  margin: 0 0 1rem;
+  font-size: 1.6rem;
+  color: var(--color-accent);
+}
+
+.section-title {
+  margin: 1.5rem 0 0.75rem;
+  font-size: 1.25rem;
+  color: var(--color-text);
+}
+
+/* css for reports grid below: */
+
+.reports-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 1.25rem;
+}
+
+/* css for loading / error / empty states below: */
+
+.loading-message {
+  text-align: center;
+  padding: 3rem 1rem;
+  color: var(--color-text-light);
+  font-size: 1.1rem;
+}
+
+.error-message {
+  background-color: #fdecea;
+  border: 1px solid #f5c6cb;
+  color: var(--color-error);
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+}
+
+.error-message ul {
+  margin: 0;
+  padding-left: 1.25rem;
+}
+
+.success-message {
+  background-color: #e8f5e9;
+  border: 1px solid #a5d6a7;
+  color: var(--color-success);
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  font-weight: 500;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 2.5rem 1rem;
+  color: var(--color-text-light);
+  background-color: var(--color-light-orange);
+  border-radius: 10px;
+}
+
+/* css for buttons below: */
+
+.btn {
+  display: inline-block;
+  border: none;
+  padding: 0.55rem 1.25rem;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  font-weight: 500;
+  text-decoration: none;
+  text-align: center;
+  transition: background-color 0.2s;
+}
+
+.btn-primary {
+  background-color: var(--color-primary);
+  color: white;
+}
+
+.btn-primary:hover {
+  background-color: var(--color-primary-hover);
+}
+
+.btn-primary:disabled {
+  background-color: #cba580;
+  cursor: not-allowed;
+}
+
+.btn-accent {
+  background-color: var(--color-accent);
+  color: white;
+}
+
+.btn-accent:hover {
+  background-color: #a54600;
+}
+
+.btn-accent:disabled {
+  background-color: #c9a68e;
+  cursor: not-allowed;
+}
+
+.btn-secondary {
+  background-color: #e0d5cb;
+  color: var(--color-text);
+}
+
+.btn-secondary:hover {
+  background-color: #d0c3b5;
+}
+
+/* css for submit form below: */
+
+.submit-form {
+  background: var(--color-card-bg);
+  border: 1px solid var(--color-border);
+  border-radius: 10px;
+  padding: 1.5rem;
+}
+
+.form-group {
+  margin-bottom: 1.15rem;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.3rem;
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: var(--color-text);
+}
+
+.form-group input[type='text'],
+.form-group input[type='password'],
+.form-group select,
+.form-group textarea {
+  width: 100%;
+  padding: 0.5rem 0.75rem;
+  border: 1px solid var(--color-border);
+  border-radius: 6px;
+  font-size: 0.95rem;
+  background: #fff;
+  color: var(--color-text);
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 2px rgba(232, 118, 10, 0.2);
+}
+
+.form-group input[type='file'] {
+  font-size: 0.9rem;
+}
+
+.form-group textarea {
+  resize: vertical;
+}
+
+.btn-submit {
+  width: 100%;
+  padding: 0.7rem;
+  font-size: 1.05rem;
+}
+
+.map-picker-wrapper {
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid var(--color-border);
+  margin-top: 0.4rem;
+}
+
+.map-picker {
+  height: 320px;
+  width: 100%;
+}
+
+.location-info {
+  margin-top: 0.5rem;
+  font-size: 0.85rem;
+  color: var(--color-text-light);
+  line-height: 1.5;
+}
+
+/* css for success card (after submit) below: */
+
+.success-card {
+  text-align: center;
+  background: var(--color-card-bg);
+  border: 1px solid var(--color-border);
+  border-radius: 10px;
+  padding: 2.5rem 1.5rem;
+  margin-top: 2rem;
+}
+
+.success-card h2 {
+  color: var(--color-success);
+  margin: 0 0 0.5rem;
+}
+
+.success-card p {
+  color: var(--color-text-light);
+  margin: 0 0 1.25rem;
+}
+
+/* css for detail page below: */
+
+.back-link {
+  display: inline-block;
+  margin-bottom: 1rem;
+  text-decoration: none;
+  color: var(--color-primary);
+  font-weight: 500;
+}
+
+.back-link:hover {
+  text-decoration: underline;
+}
+
+.detail-card {
+  background: var(--color-card-bg);
+  border: 1px solid var(--color-border);
+  border-radius: 10px;
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+}
+
+.detail-image-section {
+  overflow: hidden;
+}
+
+.detail-image {
+  width: 100%;
+  height: 100%;
+  min-height: 300px;
+  object-fit: cover;
+}
+
+.detail-info-section {
+  padding: 1.5rem;
+}
+
+.detail-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+}
+
+.detail-name {
+  margin: 0;
+  font-size: 1.5rem;
+  color: var(--color-text);
+}
+
+.status-badge-large {
+  padding: 0.3rem 0.85rem;
+  border-radius: 14px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.status-badge-large.lost {
+  background-color: var(--color-error);
+  color: white;
+}
+
+.status-badge-large.found {
+  background-color: var(--color-success);
+  color: white;
+}
+
+.detail-fields {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+
+.detail-field {
+  display: flex;
+  flex-direction: column;
+}
+
+.field-label {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--color-text-light);
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+}
+
+.field-value {
+  font-size: 0.95rem;
+  color: var(--color-text);
+}
+
+.mark-found-section {
+  margin-top: 1.25rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--color-border);
+}
+
+.mark-found-form p {
+  margin: 0 0 0.5rem;
+  font-size: 0.9rem;
+  color: var(--color-text-light);
+}
+
+.mark-found-input-row {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.mark-found-input-row input {
+  flex: 1;
+  min-width: 160px;
+  padding: 0.45rem 0.75rem;
+  border: 1px solid var(--color-border);
+  border-radius: 6px;
+  font-size: 0.95rem;
+}
+
+.mark-found-input-row input:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 2px rgba(232, 118, 10, 0.2);
+}
+
+.inline-error {
+  color: var(--color-error);
+  font-size: 0.85rem;
+  margin: 0.4rem 0 0;
+}
+
+/* extra css for responsiveness below: */
+
+@media (max-width: 768px) {
+  .detail-card {
+    grid-template-columns: 1fr;
+  }
+
+  .detail-image {
+    max-height: 280px;
+  }
+
+  .reports-grid {
+    grid-template-columns: 1fr;
+  }
+}

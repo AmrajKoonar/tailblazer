@@ -1,0 +1,95 @@
+/* css for report card below: */
+.report-card {
+  background: var(--color-card-bg);
+  border: 1px solid var(--color-border);
+  border-radius: 10px;
+  overflow: hidden;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.report-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+}
+
+.report-card-image {
+  position: relative;
+  width: 100%;
+  height: 180px;
+  overflow: hidden;
+}
+
+.report-card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.status-badge {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  padding: 3px 10px;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.status-badge.lost {
+  background-color: var(--color-error);
+  color: white;
+}
+
+.status-badge.found {
+  background-color: var(--color-success);
+  color: white;
+}
+
+.report-card-body {
+  padding: 0.85rem;
+}
+
+.report-card-name {
+  margin: 0 0 0.25rem;
+  font-size: 1.1rem;
+  color: var(--color-text);
+}
+
+.report-card-type {
+  margin: 0 0 0.3rem;
+  color: var(--color-primary);
+  font-weight: 500;
+  font-size: 0.9rem;
+}
+
+.report-card-address {
+  margin: 0 0 0.25rem;
+  color: var(--color-text-light);
+  font-size: 0.82rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.report-card-date {
+  margin: 0 0 0.6rem;
+  color: var(--color-text-light);
+  font-size: 0.78rem;
+}
+
+.report-card-link {
+  display: inline-block;
+  background-color: var(--color-primary);
+  color: white;
+  text-decoration: none;
+  padding: 0.4rem 1rem;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  transition: background-color 0.2s;
+}
+
+.report-card-link:hover {
+  background-color: var(--color-primary-hover);
+}
