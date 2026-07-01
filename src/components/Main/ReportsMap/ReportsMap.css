@@ -21,7 +21,6 @@
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  background: rgba(255, 255, 255, 0.94);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-pill);
   padding: 0.5rem 0.95rem;
@@ -29,6 +28,7 @@
   font-weight: 600;
   color: var(--color-text-light);
   box-shadow: var(--shadow-sm);
+  background: var(--color-card-bg);
 }
 
 .reports-map-empty svg {

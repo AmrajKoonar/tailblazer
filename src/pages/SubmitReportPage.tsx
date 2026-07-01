@@ -266,7 +266,7 @@ function SubmitReportPage() {
             <span className="draft-bar__status">
               <Save size={15} />
               {draftRestored && !draftSaved
-                ? 'Draft restored — we saved your earlier progress'
+                ? 'Draft restored - we saved your earlier progress'
                 : 'Draft saved automatically'}
             </span>
             <button type="button" className="draft-bar__clear" onClick={handleClearDraft}>

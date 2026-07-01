@@ -100,12 +100,12 @@ The app is deployed as a static Vite build to GitHub Pages via GitHub Actions.
    - `VITE_JSONBIN_BIN_ID`
    - `VITE_JSONBIN_API_KEY`
 
-   Note: unlike the local `.env`, GitHub secret values are stored raw — do **not** escape `$` characters in the JSONBin key.
+   Note: unlike the local `.env`, GitHub secret values are stored raw - do **not** escape `$` characters in the JSONBin key.
 3. Push to `main` (or run the workflow manually) to trigger the first deployment.
 
 ### Environment variable note
 
-All app variables are prefixed with `VITE_`, which means Vite **inlines them into the client bundle at build time**. They are therefore publicly visible in the deployed frontend — this is expected for a fully client-side app. Do not put anything that must stay private in `VITE_` variables. The real `.env` file is git-ignored and is never committed; only `.env_example` is tracked.
+All app variables are prefixed with `VITE_`, which means Vite **inlines them into the client bundle at build time**. They are therefore publicly visible in the deployed frontend - this is expected for a fully client-side app. Do not put anything that must stay private in `VITE_` variables. The real `.env` file is git-ignored and is never committed; only `.env_example` is tracked.
 
 ---
 

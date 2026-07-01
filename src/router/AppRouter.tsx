@@ -4,6 +4,7 @@ import SubmitReportPage from '../pages/SubmitReportPage';
 import ReportDetailPage from '../pages/ReportDetailPage';
 import { Header } from '../components/Header';
 import { Footer } from '../components/Footer';
+import { BottomNav } from '../components/BottomNav';
 
 function AppRouter() {
   return (
@@ -18,6 +19,7 @@ function AppRouter() {
           </Routes>
         </main>
         <Footer />
+        <BottomNav />
       </div>
     </BrowserRouter>
   );

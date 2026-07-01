@@ -2,10 +2,15 @@
 
 /* ==========================================================================
    TailBlazer design system
-   Global tokens: color, typography, spacing, radius, shadow, transitions.
+   Tokens are defined for a light theme on :root and overridden for dark via
+   [data-theme="dark"]. All components consume these variables so they adapt
+   automatically to the active theme.
    ========================================================================== */
 
-:root {
+:root,
+[data-theme='light'] {
+  color-scheme: light;
+
   /* Brand & surface colors */
   --color-bg: #fdf7f0;
   --color-bg-soft: #f6ede1;
@@ -18,19 +23,42 @@
   --color-text: #1f2a37;
   --color-text-light: #64748b;
   --color-card-bg: #ffffff;
+  --color-input-bg: #ffffff;
+  --color-header-bg: rgba(253, 247, 240, 0.82);
   --color-border: #ece2d5;
   --color-border-strong: #dccbb6;
   --color-light-orange: #ffedd5;
   --color-success: #059669;
   --color-success-soft: #e7f6ef;
+  --color-success-border: #a5d6a7;
   --color-error: #dc2626;
   --color-error-soft: #fdeceb;
+  --color-error-border: #f5c6cb;
+
+  /* Neutral hover overlays (theme-aware) */
+  --color-hover: rgba(15, 42, 71, 0.06);
+  --color-hover-strong: rgba(15, 42, 71, 0.09);
+
+  /* Status badges (kept consistent across themes for contrast) */
+  --badge-lost-bg: #dc2626;
+  --badge-found-bg: #059669;
+  --badge-text: #ffffff;
 
   /* Gradients */
   --gradient-primary: linear-gradient(135deg, #f97316 0%, #fb923c 100%);
   --gradient-hero: radial-gradient(1200px 500px at 15% -10%, rgba(249, 115, 22, 0.14), transparent 60%),
     radial-gradient(1000px 500px at 100% 0%, rgba(15, 42, 71, 0.1), transparent 55%);
   --gradient-navy: linear-gradient(135deg, #0f2a47 0%, #1b3a5c 100%);
+
+  /* Shadows */
+  --shadow-xs: 0 1px 2px rgba(15, 42, 71, 0.06);
+  --shadow-sm: 0 2px 8px rgba(15, 42, 71, 0.08);
+  --shadow-md: 0 8px 24px rgba(15, 42, 71, 0.1);
+  --shadow-lg: 0 18px 45px rgba(15, 42, 71, 0.14);
+  --shadow-glow: 0 10px 30px rgba(249, 115, 22, 0.28);
+
+  /* Map dark tile filter (none in light) */
+  --map-tile-filter: none;
 
   /* Typography */
   --font-sans: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -53,19 +81,57 @@
   --radius-xl: 24px;
   --radius-pill: 999px;
 
-  /* Shadows */
-  --shadow-xs: 0 1px 2px rgba(15, 42, 71, 0.06);
-  --shadow-sm: 0 2px 8px rgba(15, 42, 71, 0.08);
-  --shadow-md: 0 8px 24px rgba(15, 42, 71, 0.1);
-  --shadow-lg: 0 18px 45px rgba(15, 42, 71, 0.14);
-  --shadow-glow: 0 10px 30px rgba(249, 115, 22, 0.28);
-
   /* Transitions */
   --transition-fast: 0.15s ease;
   --transition: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-theme: 0.3s ease;
 
   /* Layout */
   --width-page: 1140px;
+  --bottom-nav-height: 64px;
+}
+
+[data-theme='dark'] {
+  color-scheme: dark;
+
+  --color-bg: #0c1826;
+  --color-bg-soft: #122032;
+  --color-primary: #fb8c3c;
+  --color-primary-hover: #fdba74;
+  --color-primary-soft: rgba(249, 115, 22, 0.16);
+  --color-accent: #e7eef7;
+  --color-navy: #e7eef7;
+  --color-navy-soft: #c7d5e6;
+  --color-text: #e6edf5;
+  --color-text-light: #9fb0c3;
+  --color-card-bg: #16273b;
+  --color-input-bg: #0f1d2e;
+  --color-header-bg: rgba(12, 24, 38, 0.82);
+  --color-border: #24384f;
+  --color-border-strong: #34506e;
+  --color-light-orange: rgba(249, 115, 22, 0.18);
+  --color-success: #34d399;
+  --color-success-soft: rgba(16, 185, 129, 0.16);
+  --color-success-border: rgba(52, 211, 153, 0.4);
+  --color-error: #f87171;
+  --color-error-soft: rgba(239, 68, 68, 0.16);
+  --color-error-border: rgba(248, 113, 113, 0.42);
+
+  --color-hover: rgba(255, 255, 255, 0.06);
+  --color-hover-strong: rgba(255, 255, 255, 0.1);
+
+  --gradient-primary: linear-gradient(135deg, #f97316 0%, #fb923c 100%);
+  --gradient-hero: radial-gradient(1200px 500px at 15% -10%, rgba(249, 115, 22, 0.14), transparent 60%),
+    radial-gradient(1000px 520px at 100% 0%, rgba(56, 189, 248, 0.08), transparent 55%);
+  --gradient-navy: linear-gradient(135deg, #0a1420 0%, #14263a 100%);
+
+  --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.4);
+  --shadow-sm: 0 2px 10px rgba(0, 0, 0, 0.45);
+  --shadow-md: 0 10px 28px rgba(0, 0, 0, 0.5);
+  --shadow-lg: 0 20px 48px rgba(0, 0, 0, 0.55);
+  --shadow-glow: 0 10px 30px rgba(249, 115, 22, 0.22);
+
+  --map-tile-filter: brightness(0.75) invert(1) contrast(0.9) hue-rotate(180deg) saturate(0.75);
 }
 
 *,
@@ -87,6 +153,8 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+  transition: background-color var(--transition-theme), color var(--transition-theme);
 }
 
 h1,
@@ -124,15 +192,82 @@ textarea {
   font-family: inherit;
 }
 
-/* Global visible focus for accessibility */
+/* Theme transition on the main themeable surfaces */
+.header,
+.footer,
+.report-card,
+.form-card,
+.detail-card,
+.state-card,
+.empty-state,
+.report-filters,
+.filter-search input,
+.form-group input,
+.form-group select,
+.form-group textarea,
+.stat-card,
+.hero-visual-card,
+.hero-badge,
+.reports-map-wrapper,
+.bottom-nav,
+.location-info,
+.detail-field__icon {
+  transition: background-color var(--transition-theme), border-color var(--transition-theme),
+    color var(--transition-theme), box-shadow var(--transition-theme);
+}
+
+/* Global visible focus for accessibility (works in both themes) */
 :focus-visible {
-  outline: 3px solid rgba(249, 115, 22, 0.45);
+  outline: 3px solid var(--color-primary);
   outline-offset: 2px;
   border-radius: 4px;
 }
 
 ::selection {
   background: rgba(249, 115, 22, 0.22);
+}
+
+/* ---- Leaflet theming (kept minimal so map behavior is never broken) ---- */
+.leaflet-tile {
+  /* In dark mode a filter darkens the raster tiles; markers/popups are unaffected */
+  filter: var(--map-tile-filter);
+}
+
+.leaflet-popup-content-wrapper,
+.leaflet-popup-tip {
+  background: var(--color-card-bg);
+  color: var(--color-text);
+}
+
+.leaflet-popup-content-wrapper {
+  box-shadow: var(--shadow-lg);
+}
+
+.leaflet-container a.leaflet-popup-close-button {
+  color: var(--color-text-light);
+}
+
+[data-theme='dark'] .leaflet-control-attribution {
+  background: rgba(10, 20, 32, 0.75);
+  color: var(--color-text-light);
+}
+
+[data-theme='dark'] .leaflet-control-attribution a {
+  color: var(--color-navy-soft);
+}
+
+[data-theme='dark'] .leaflet-bar a,
+[data-theme='dark'] .leaflet-bar a:hover {
+  background: var(--color-card-bg);
+  color: var(--color-text);
+  border-bottom-color: var(--color-border);
+}
+
+/* Leave room for the fixed mobile bottom navigation */
+@media (max-width: 768px) {
+  body {
+    padding-bottom: calc(var(--bottom-nav-height) + env(safe-area-inset-bottom, 0px));
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
