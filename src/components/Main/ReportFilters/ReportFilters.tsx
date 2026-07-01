@@ -1,3 +1,4 @@
+import { SlidersHorizontal } from 'lucide-react';
 import { AnimalType, ReportStatus, FilterState } from '../../../models';
 import './ReportFilters.css';
 
@@ -10,6 +11,9 @@ interface ReportFiltersProps {
 function ReportFilters({ filters, onAnimalTypeChange, onStatusChange }: ReportFiltersProps) {
   return (
     <div className="report-filters">
+      <span className="report-filters__label" aria-hidden="true">
+        <SlidersHorizontal size={16} /> Filter
+      </span>
       <div className="filter-group">
         <label htmlFor="animal-type-filter">Animal Type</label>
         <select

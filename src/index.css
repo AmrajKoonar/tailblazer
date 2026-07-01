@@ -1,15 +1,71 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap');
+
+/* ==========================================================================
+   TailBlazer design system
+   Global tokens: color, typography, spacing, radius, shadow, transitions.
+   ========================================================================== */
+
 :root {
-  --color-bg: #fff8f0;
-  --color-primary: #e8760a;
-  --color-primary-hover: #d06800;
-  --color-accent: #c45200;
-  --color-text: #3d2e1f;
-  --color-text-light: #6b5744;
+  /* Brand & surface colors */
+  --color-bg: #fdf7f0;
+  --color-bg-soft: #f6ede1;
+  --color-primary: #f97316;
+  --color-primary-hover: #ea580c;
+  --color-primary-soft: #fff2e6;
+  --color-accent: #0f2a47;
+  --color-navy: #0f2a47;
+  --color-navy-soft: #1b3a5c;
+  --color-text: #1f2a37;
+  --color-text-light: #64748b;
   --color-card-bg: #ffffff;
-  --color-border: #f0c8a0;
-  --color-light-orange: #ffe8cc;
-  --color-success: #2e7d32;
-  --color-error: #c62828;
+  --color-border: #ece2d5;
+  --color-border-strong: #dccbb6;
+  --color-light-orange: #ffedd5;
+  --color-success: #059669;
+  --color-success-soft: #e7f6ef;
+  --color-error: #dc2626;
+  --color-error-soft: #fdeceb;
+
+  /* Gradients */
+  --gradient-primary: linear-gradient(135deg, #f97316 0%, #fb923c 100%);
+  --gradient-hero: radial-gradient(1200px 500px at 15% -10%, rgba(249, 115, 22, 0.14), transparent 60%),
+    radial-gradient(1000px 500px at 100% 0%, rgba(15, 42, 71, 0.1), transparent 55%);
+  --gradient-navy: linear-gradient(135deg, #0f2a47 0%, #1b3a5c 100%);
+
+  /* Typography */
+  --font-sans: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  --font-display: 'Plus Jakarta Sans', 'Inter', 'Segoe UI', sans-serif;
+
+  /* Spacing scale */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+  --space-7: 3rem;
+  --space-8: 4rem;
+
+  /* Radius */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 18px;
+  --radius-xl: 24px;
+  --radius-pill: 999px;
+
+  /* Shadows */
+  --shadow-xs: 0 1px 2px rgba(15, 42, 71, 0.06);
+  --shadow-sm: 0 2px 8px rgba(15, 42, 71, 0.08);
+  --shadow-md: 0 8px 24px rgba(15, 42, 71, 0.1);
+  --shadow-lg: 0 18px 45px rgba(15, 42, 71, 0.14);
+  --shadow-glow: 0 10px 30px rgba(249, 115, 22, 0.28);
+
+  /* Transitions */
+  --transition-fast: 0.15s ease;
+  --transition: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* Layout */
+  --width-page: 1140px;
 }
 
 *,
@@ -18,13 +74,28 @@
   box-sizing: border-box;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   margin: 0;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: var(--font-sans);
   background-color: var(--color-bg);
   color: var(--color-text);
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-display);
+  line-height: 1.2;
+  color: var(--color-text);
 }
 
 img {
@@ -34,6 +105,12 @@ img {
 
 a {
   color: var(--color-primary);
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+
+a:hover {
+  color: var(--color-primary-hover);
 }
 
 button {
@@ -45,4 +122,28 @@ input,
 select,
 textarea {
   font-family: inherit;
+}
+
+/* Global visible focus for accessibility */
+:focus-visible {
+  outline: 3px solid rgba(249, 115, 22, 0.45);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+::selection {
+  background: rgba(249, 115, 22, 0.22);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
 }

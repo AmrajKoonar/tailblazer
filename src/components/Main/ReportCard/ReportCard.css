@@ -1,95 +1,165 @@
 /* css for report card below: */
 .report-card {
+  display: flex;
+  flex-direction: column;
   background: var(--color-card-bg);
   border: 1px solid var(--color-border);
-  border-radius: 10px;
+  border-radius: var(--radius-lg);
   overflow: hidden;
-  transition: transform 0.2s, box-shadow 0.2s;
+  box-shadow: var(--shadow-xs);
+  transition: box-shadow var(--transition), border-color var(--transition);
+  height: 100%;
 }
 
 .report-card:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--shadow-lg);
+  border-color: var(--color-border-strong);
+}
+
+.report-card-media-link {
+  display: block;
 }
 
 .report-card-image {
   position: relative;
   width: 100%;
-  height: 180px;
+  aspect-ratio: 4 / 3;
   overflow: hidden;
+  background: var(--color-bg-soft);
 }
 
 .report-card-image img {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  transition: transform 0.45s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.report-card:hover .report-card-image img {
+  transform: scale(1.06);
+}
+
+.report-card-image-fallback {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  place-items: center;
+  color: var(--color-border-strong);
+  background: var(--color-bg-soft);
 }
 
 .status-badge {
   position: absolute;
-  top: 8px;
-  right: 8px;
-  padding: 3px 10px;
-  border-radius: 12px;
-  font-size: 0.75rem;
-  font-weight: 600;
+  top: 10px;
+  right: 10px;
+  padding: 0.28rem 0.7rem;
+  border-radius: var(--radius-pill);
+  font-size: 0.72rem;
+  font-weight: 700;
   text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: #fff;
+  backdrop-filter: blur(2px);
+  box-shadow: var(--shadow-sm);
 }
 
 .status-badge.lost {
   background-color: var(--color-error);
-  color: white;
 }
 
 .status-badge.found {
   background-color: var(--color-success);
-  color: white;
 }
 
 .report-card-body {
-  padding: 0.85rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 1rem 1.1rem 1.1rem;
+  flex: 1;
+}
+
+.report-card-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
 }
 
 .report-card-name {
-  margin: 0 0 0.25rem;
-  font-size: 1.1rem;
-  color: var(--color-text);
+  margin: 0;
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--color-navy);
+  letter-spacing: -0.01em;
 }
 
 .report-card-type {
-  margin: 0 0 0.3rem;
-  color: var(--color-primary);
-  font-weight: 500;
-  font-size: 0.9rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  color: var(--color-primary-hover);
+  background: var(--color-primary-soft);
+  padding: 0.2rem 0.6rem;
+  border-radius: var(--radius-pill);
+  font-weight: 600;
+  font-size: 0.75rem;
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 
-.report-card-address {
-  margin: 0 0 0.25rem;
+.report-card-description {
+  margin: 0;
+  color: var(--color-text-light);
+  font-size: 0.9rem;
+  line-height: 1.5;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.report-card-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  margin-top: 0.15rem;
+}
+
+.report-card-meta-item {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
   color: var(--color-text-light);
   font-size: 0.82rem;
+}
+
+.report-card-meta-item svg {
+  color: var(--color-primary);
+  flex-shrink: 0;
+}
+
+.truncate {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
-.report-card-date {
-  margin: 0 0 0.6rem;
-  color: var(--color-text-light);
-  font-size: 0.78rem;
-}
-
 .report-card-link {
-  display: inline-block;
-  background-color: var(--color-primary);
-  color: white;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin-top: auto;
+  padding-top: 0.75rem;
+  color: var(--color-navy);
   text-decoration: none;
-  padding: 0.4rem 1rem;
-  border-radius: 6px;
-  font-size: 0.85rem;
-  font-weight: 500;
-  transition: background-color 0.2s;
+  font-size: 0.9rem;
+  font-weight: 700;
+  transition: gap var(--transition-fast), color var(--transition-fast);
 }
 
 .report-card-link:hover {
-  background-color: var(--color-primary-hover);
+  color: var(--color-primary);
+  gap: 0.6rem;
 }

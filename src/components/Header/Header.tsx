@@ -1,32 +1,43 @@
 import { Link, useLocation } from 'react-router-dom';
+import { motion } from 'framer-motion';
+import { Home, PlusCircle } from 'lucide-react';
 import './Header.css';
 
 function Header() {
   const location = useLocation();
 
   return (
-    <header className="header">
+    <motion.header
+      className="header"
+      initial={{ y: -60, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ duration: 0.4, ease: 'easeOut' }}
+    >
       <div className="header-content">
         <Link to="/" className="header-logo">
           <img src="/paw.png" alt="TailBlazer logo" className="logo-icon" />
-          <span className="logo-text"><span className="logo-tail">Tail</span>Blazer</span>
+          <span className="logo-text">
+            <span className="logo-tail">Tail</span>Blazer
+          </span>
         </Link>
-        <nav className="header-nav">
+        <nav className="header-nav" aria-label="Primary">
           <Link
             to="/"
             className={`nav-link ${location.pathname === '/' ? 'active' : ''}`}
           >
+            <Home size={17} aria-hidden="true" />
             Home
           </Link>
           <Link
             to="/submit"
-            className={`nav-link ${location.pathname === '/submit' ? 'active' : ''}`}
+            className={`nav-link nav-cta ${location.pathname === '/submit' ? 'active' : ''}`}
           >
+            <PlusCircle size={17} aria-hidden="true" />
             Submit Report
           </Link>
         </nav>
       </div>
-    </header>
+    </motion.header>
   );
 }
 

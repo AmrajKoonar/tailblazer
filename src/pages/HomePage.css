@@ -1,0 +1,192 @@
+/* ==========================================================================
+   Home page: hero, stats, integrated map, browse section
+   ========================================================================== */
+
+.home-hero {
+  position: relative;
+  background: var(--gradient-hero), var(--color-bg);
+  overflow: hidden;
+}
+
+.home-hero::after {
+  content: '';
+  position: absolute;
+  inset: auto 0 -1px 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--color-border-strong), transparent);
+}
+
+.hero-inner {
+  max-width: var(--width-page);
+  margin: 0 auto;
+  padding: var(--space-8) var(--space-5) var(--space-7);
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: var(--space-7);
+  align-items: center;
+}
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.4rem 0.9rem;
+  background: #fff;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-pill);
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--color-primary-hover);
+  box-shadow: var(--shadow-xs);
+  margin-bottom: var(--space-4);
+}
+
+.hero-title {
+  font-size: clamp(2.1rem, 5vw, 3.4rem);
+  font-weight: 800;
+  line-height: 1.08;
+  letter-spacing: -0.03em;
+  color: var(--color-navy);
+  margin: 0 0 var(--space-4);
+}
+
+.hero-title .accent {
+  background: var(--gradient-primary);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.hero-subtitle {
+  font-size: 1.12rem;
+  color: var(--color-text-light);
+  max-width: 52ch;
+  margin: 0 0 var(--space-5);
+}
+
+.hero-actions {
+  display: flex;
+  gap: var(--space-3);
+  flex-wrap: wrap;
+}
+
+.hero-stats {
+  display: flex;
+  gap: var(--space-5);
+  margin-top: var(--space-6);
+  flex-wrap: wrap;
+}
+
+.hero-stat {
+  display: flex;
+  flex-direction: column;
+}
+
+.hero-stat__value {
+  font-family: var(--font-display);
+  font-size: 1.9rem;
+  font-weight: 800;
+  color: var(--color-navy);
+  line-height: 1;
+}
+
+.hero-stat__label {
+  font-size: 0.85rem;
+  color: var(--color-text-light);
+  margin-top: 0.25rem;
+}
+
+.hero-stat--lost .hero-stat__value {
+  color: var(--color-error);
+}
+
+.hero-stat--found .hero-stat__value {
+  color: var(--color-success);
+}
+
+/* Hero visual card */
+.hero-visual {
+  position: relative;
+}
+
+.hero-visual-card {
+  background: #fff;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  padding: var(--space-5);
+  box-shadow: var(--shadow-lg);
+}
+
+.hero-visual-img {
+  width: 100%;
+  height: 260px;
+  object-fit: cover;
+  border-radius: var(--radius-lg);
+}
+
+.hero-visual-caption {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-top: var(--space-4);
+  font-weight: 600;
+  color: var(--color-navy);
+}
+
+.hero-visual-caption .dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--color-success);
+  box-shadow: 0 0 0 4px var(--color-success-soft);
+}
+
+.hero-feature-list {
+  list-style: none;
+  padding: 0;
+  margin: var(--space-4) 0 0;
+  display: grid;
+  gap: 0.65rem;
+}
+
+.hero-feature-list li {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 0.92rem;
+  color: var(--color-text-light);
+}
+
+.hero-feature-list svg {
+  color: var(--color-primary);
+  flex-shrink: 0;
+}
+
+/* Map section */
+.map-section {
+  max-width: var(--width-page);
+  margin: 0 auto;
+  padding: var(--space-7) var(--space-5) 0;
+}
+
+.browse-section {
+  max-width: var(--width-page);
+  margin: 0 auto;
+  padding: 0 var(--space-5) var(--space-6);
+}
+
+@media (max-width: 900px) {
+  .hero-inner {
+    grid-template-columns: 1fr;
+    gap: var(--space-6);
+    padding-top: var(--space-7);
+  }
+
+  .hero-visual {
+    order: -1;
+  }
+
+  .hero-visual-img {
+    height: 220px;
+  }
+}
