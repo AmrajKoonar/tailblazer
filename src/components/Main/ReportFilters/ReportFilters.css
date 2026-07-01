@@ -1,29 +1,76 @@
 /* css for report filters below: */
 .report-filters {
   display: flex;
-  align-items: flex-end;
+  flex-direction: column;
   gap: 0.85rem;
-  flex-wrap: wrap;
   background: var(--color-card-bg);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-lg);
-  padding: 0.85rem 1rem;
+  padding: 1rem;
   box-shadow: var(--shadow-xs);
 }
 
-.report-filters__label {
-  display: inline-flex;
+/* Search box */
+.filter-search {
+  position: relative;
+  display: flex;
   align-items: center;
-  gap: 0.4rem;
-  font-family: var(--font-display);
-  font-size: 0.85rem;
-  font-weight: 700;
-  color: var(--color-navy);
-  padding-bottom: 0.55rem;
 }
 
-.report-filters__label svg {
-  color: var(--color-primary);
+.filter-search__icon {
+  position: absolute;
+  left: 0.85rem;
+  color: var(--color-text-light);
+  pointer-events: none;
+}
+
+.filter-search input {
+  width: 100%;
+  padding: 0.65rem 2.5rem;
+  border: 1px solid var(--color-border-strong);
+  border-radius: var(--radius-md);
+  background: var(--color-bg-soft);
+  color: var(--color-text);
+  font-size: 0.95rem;
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast), background var(--transition-fast);
+}
+
+.filter-search input::placeholder {
+  color: #a5adb8;
+}
+
+.filter-search input:focus {
+  outline: none;
+  background: #fff;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(249, 115, 22, 0.16);
+}
+
+.filter-search__clear {
+  position: absolute;
+  right: 0.6rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  border: none;
+  border-radius: 50%;
+  background: var(--color-border);
+  color: var(--color-text);
+  transition: background var(--transition-fast);
+}
+
+.filter-search__clear:hover {
+  background: var(--color-border-strong);
+}
+
+/* Controls row */
+.filter-controls {
+  display: flex;
+  align-items: flex-end;
+  gap: 0.85rem;
+  flex-wrap: wrap;
 }
 
 .filter-group {
@@ -33,11 +80,18 @@
 }
 
 .filter-group label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
   font-size: 0.72rem;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.04em;
   color: var(--color-text-light);
+}
+
+.filter-group label svg {
+  color: var(--color-primary);
 }
 
 .filter-group select {
@@ -67,17 +121,34 @@
   box-shadow: 0 0 0 3px rgba(249, 115, 22, 0.16);
 }
 
-@media (max-width: 520px) {
-  .report-filters {
-    width: 100%;
+.filter-clear {
+  margin-left: auto;
+  padding: 0.55rem 1rem;
+  color: var(--color-text-light);
+}
+
+.filter-clear:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+@media (max-width: 640px) {
+  .filter-controls {
+    gap: 0.6rem;
   }
 
   .filter-group {
-    flex: 1;
+    flex: 1 1 45%;
   }
 
   .filter-group select {
     width: 100%;
     min-width: 0;
+  }
+
+  .filter-clear {
+    flex: 1 1 100%;
+    margin-left: 0;
+    justify-content: center;
   }
 }

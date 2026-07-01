@@ -114,6 +114,48 @@
   font-size: 0.98rem;
 }
 
+/* Draft autosave bar */
+.draft-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  flex-wrap: wrap;
+  margin-bottom: var(--space-4);
+  padding: 0.6rem 0.9rem 0.6rem 1rem;
+  background: var(--color-primary-soft);
+  border: 1px solid #f7d3ac;
+  border-radius: var(--radius-md);
+  font-size: 0.88rem;
+}
+
+.draft-bar__status {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  color: var(--color-primary-hover);
+  font-weight: 600;
+}
+
+.draft-bar__clear {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  border: none;
+  background: transparent;
+  color: var(--color-text-light);
+  font-weight: 600;
+  font-size: 0.85rem;
+  padding: 0.3rem 0.5rem;
+  border-radius: var(--radius-sm);
+  transition: color var(--transition-fast), background var(--transition-fast);
+}
+
+.draft-bar__clear:hover {
+  color: var(--color-error);
+  background: rgba(220, 38, 38, 0.08);
+}
+
 /* Form section grouping inside the form card */
 .form-section-title {
   display: flex;
