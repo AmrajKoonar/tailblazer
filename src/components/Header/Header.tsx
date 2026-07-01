@@ -1,6 +1,7 @@
 import { Link, useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Home, PlusCircle } from 'lucide-react';
+import { ThemeToggle } from '../ThemeToggle';
 import './Header.css';
 
 function Header() {
@@ -21,20 +22,23 @@ function Header() {
           </span>
         </Link>
         <nav className="header-nav" aria-label="Primary">
-          <Link
-            to="/"
-            className={`nav-link ${location.pathname === '/' ? 'active' : ''}`}
-          >
-            <Home size={17} aria-hidden="true" />
-            Home
-          </Link>
-          <Link
-            to="/submit"
-            className={`nav-link nav-cta ${location.pathname === '/submit' ? 'active' : ''}`}
-          >
-            <PlusCircle size={17} aria-hidden="true" />
-            Submit Report
-          </Link>
+          <div className="header-links">
+            <Link
+              to="/"
+              className={`nav-link ${location.pathname === '/' ? 'active' : ''}`}
+            >
+              <Home size={17} aria-hidden="true" />
+              Home
+            </Link>
+            <Link
+              to="/submit"
+              className={`nav-link nav-cta ${location.pathname === '/submit' ? 'active' : ''}`}
+            >
+              <PlusCircle size={17} aria-hidden="true" />
+              Submit Report
+            </Link>
+          </div>
+          <ThemeToggle className="header-theme" />
         </nav>
       </div>
     </motion.header>

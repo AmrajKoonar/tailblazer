@@ -58,17 +58,17 @@
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.04em;
-  color: #fff;
+  color: var(--badge-text);
   backdrop-filter: blur(2px);
   box-shadow: var(--shadow-sm);
 }
 
 .status-badge.lost {
-  background-color: var(--color-error);
+  background-color: var(--badge-lost-bg);
 }
 
 .status-badge.found {
-  background-color: var(--color-success);
+  background-color: var(--badge-found-bg);
 }
 
 .report-card-body {

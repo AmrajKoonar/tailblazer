@@ -31,7 +31,7 @@
   align-items: center;
   gap: 0.45rem;
   padding: 0.4rem 0.9rem;
-  background: #fff;
+  background: var(--color-card-bg);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-pill);
   font-size: 0.8rem;
@@ -110,7 +110,7 @@
 }
 
 .hero-visual-card {
-  background: #fff;
+  background: var(--color-card-bg);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-xl);
   padding: var(--space-5);
@@ -216,7 +216,7 @@
 
 .stat-card__icon--total,
 .stat-card__icon--date {
-  background: rgba(15, 42, 71, 0.08);
+  background: var(--color-hover-strong);
   color: var(--color-navy);
 }
 
@@ -282,5 +282,31 @@
 
   .hero-visual-img {
     height: 220px;
+  }
+}
+
+@media (max-width: 560px) {
+  .hero-inner {
+    padding: var(--space-6) var(--space-4) var(--space-5);
+  }
+
+  .hero-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .hero-actions .btn {
+    width: 100%;
+  }
+
+  .hero-stats {
+    gap: var(--space-4);
+  }
+
+  .map-section,
+  .browse-section,
+  .stats-band {
+    padding-left: var(--space-4);
+    padding-right: var(--space-4);
   }
 }

@@ -41,7 +41,7 @@
 
 .filter-search input:focus {
   outline: none;
-  background: #fff;
+  background: var(--color-input-bg);
   border-color: var(--color-primary);
   box-shadow: 0 0 0 3px rgba(249, 115, 22, 0.16);
 }
