@@ -1,5 +1,18 @@
 import { useState, useEffect, useCallback } from 'react';
 import { useParams, Link } from 'react-router-dom';
+import { motion } from 'framer-motion';
+import {
+  ArrowLeft,
+  PawPrint,
+  FileText,
+  Phone,
+  MapPin,
+  Navigation,
+  Calendar,
+  CheckCircle2,
+  Lock,
+  SearchX,
+} from 'lucide-react';
 import { AnimalReport, ReportStatus } from '../models';
 import { fetchReports, saveReports } from '../services/jsonBinService';
 import { formatDate } from '../utils/formatDate';
@@ -10,6 +23,7 @@ function ReportDetailPage() {
   const [report, setReport] = useState<AnimalReport | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [imgError, setImgError] = useState(false);
 
   const [showMarkFound, setShowMarkFound] = useState(false);
   const [password, setPassword] = useState('');
@@ -77,7 +91,10 @@ function ReportDetailPage() {
   if (loading) {
     return (
       <div className="page-container">
-        <div className="loading-message">Loading report...</div>
+        <div className="state-card">
+          <div className="spinner" />
+          <p className="state-card__text">Loading report…</p>
+        </div>
       </div>
     );
   }
@@ -85,66 +102,117 @@ function ReportDetailPage() {
   if (error || !report) {
     return (
       <div className="page-container">
-        <div className="error-message">{error || 'Report not found'}</div>
-        <Link to="/" className="btn btn-primary" style={{ marginTop: '1rem', display: 'inline-block' }}>
-          Back to Home
-        </Link>
+        <div className="state-card">
+          <div className="state-card__icon">
+            <SearchX size={30} />
+          </div>
+          <h2 className="state-card__title">{error || 'Report not found'}</h2>
+          <p className="state-card__text">
+            The report you’re looking for may have been removed or the link is incorrect.
+          </p>
+          <Link to="/" className="btn btn-primary">
+            <ArrowLeft size={18} /> Back to Home
+          </Link>
+        </div>
       </div>
     );
   }
 
+  const isLost = report.status === ReportStatus.Lost;
+
   return (
     <div className="page-container">
-      <Link to="/" className="back-link">&larr; Back to all reports</Link>
+      <Link to="/" className="back-link">
+        <ArrowLeft size={17} /> Back to all reports
+      </Link>
 
-      <div className="detail-card">
+      <motion.div
+        className="detail-card"
+        initial={{ opacity: 0, y: 18 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.45, ease: 'easeOut' }}
+      >
         <div className="detail-image-section">
-          <img src={report.photoUrl} alt={report.animalName} className="detail-image" />
+          {report.photoUrl && !imgError ? (
+            <img
+              src={report.photoUrl}
+              alt={report.animalName}
+              className="detail-image"
+              onError={() => setImgError(true)}
+            />
+          ) : (
+            <div className="detail-image" style={{ display: 'grid', placeItems: 'center' }}>
+              <PawPrint size={64} color="var(--color-border-strong)" />
+            </div>
+          )}
+          <div className="detail-status-float">
+            <span className={`status-badge-large ${report.status}`}>
+              {isLost ? 'Lost' : 'Found'}
+            </span>
+          </div>
         </div>
 
         <div className="detail-info-section">
           <div className="detail-header">
             <h1 className="detail-name">{report.animalName}</h1>
-            <span className={`status-badge-large ${report.status}`}>
-              {report.status === ReportStatus.Lost ? 'Lost' : 'Found'}
+            <span className="detail-type-chip">
+              <PawPrint size={14} /> {report.animalType}
             </span>
           </div>
 
           <div className="detail-fields">
             <div className="detail-field">
-              <span className="field-label">Animal Type</span>
-              <span className="field-value">{report.animalType}</span>
-            </div>
-            <div className="detail-field">
-              <span className="field-label">Description</span>
-              <span className="field-value">{report.description}</span>
-            </div>
-            <div className="detail-field">
-              <span className="field-label">Contact Info</span>
-              <span className="field-value">{report.contactInfo}</span>
-            </div>
-            <div className="detail-field">
-              <span className="field-label">Last Seen Address</span>
-              <span className="field-value">{report.lastSeenAddress}</span>
-            </div>
-            <div className="detail-field">
-              <span className="field-label">Coordinates</span>
-              <span className="field-value">
-                {report.lastSeenLat.toFixed(5)}, {report.lastSeenLng.toFixed(5)}
+              <span className="detail-field__icon">
+                <FileText size={18} />
               </span>
+              <div className="detail-field__body">
+                <span className="field-label">Description</span>
+                <span className="field-value">{report.description}</span>
+              </div>
             </div>
             <div className="detail-field">
-              <span className="field-label">Date Posted</span>
-              <span className="field-value">{formatDate(report.datePosted)}</span>
+              <span className="detail-field__icon">
+                <Phone size={18} />
+              </span>
+              <div className="detail-field__body">
+                <span className="field-label">Contact Info</span>
+                <span className="field-value">{report.contactInfo}</span>
+              </div>
             </div>
             <div className="detail-field">
-              <span className="field-label">Status</span>
-              <span className="field-value">{report.status === ReportStatus.Lost ? 'Lost' : 'Found'}</span>
+              <span className="detail-field__icon">
+                <MapPin size={18} />
+              </span>
+              <div className="detail-field__body">
+                <span className="field-label">Last Seen Address</span>
+                <span className="field-value">{report.lastSeenAddress}</span>
+              </div>
+            </div>
+            <div className="detail-field">
+              <span className="detail-field__icon">
+                <Navigation size={18} />
+              </span>
+              <div className="detail-field__body">
+                <span className="field-label">Coordinates</span>
+                <span className="field-value">
+                  {report.lastSeenLat.toFixed(5)}, {report.lastSeenLng.toFixed(5)}
+                </span>
+              </div>
+            </div>
+            <div className="detail-field">
+              <span className="detail-field__icon">
+                <Calendar size={18} />
+              </span>
+              <div className="detail-field__body">
+                <span className="field-label">Date Posted</span>
+                <span className="field-value">{formatDate(report.datePosted)}</span>
+              </div>
             </div>
           </div>
 
           {markSuccess && (
             <div className="success-message">
+              <CheckCircle2 size={18} />
               This animal has been marked as found!
             </div>
           )}
@@ -152,27 +220,24 @@ function ReportDetailPage() {
           {report.status === ReportStatus.Lost && !markSuccess && (
             <div className="mark-found-section">
               {!showMarkFound ? (
-                <button
-                  className="btn btn-accent"
-                  onClick={() => setShowMarkFound(true)}
-                >
-                  Mark as Found
+                <button className="btn btn-accent" onClick={() => setShowMarkFound(true)}>
+                  <CheckCircle2 size={18} /> Mark as Found
                 </button>
               ) : (
                 <div className="mark-found-form">
-                  <p>Enter the password you used when creating this report:</p>
+                  <p>
+                    <Lock size={14} style={{ verticalAlign: '-2px', marginRight: 4 }} />
+                    Enter the password you used when creating this report:
+                  </p>
                   <div className="mark-found-input-row">
                     <input
                       type="password"
                       value={password}
                       onChange={(e) => setPassword(e.target.value)}
                       placeholder="Enter password"
+                      aria-label="Report password"
                     />
-                    <button
-                      className="btn btn-accent"
-                      onClick={handleMarkAsFound}
-                      disabled={marking}
-                    >
+                    <button className="btn btn-accent" onClick={handleMarkAsFound} disabled={marking}>
                       {marking ? 'Updating...' : 'Confirm'}
                     </button>
                     <button
@@ -192,7 +257,7 @@ function ReportDetailPage() {
             </div>
           )}
         </div>
-      </div>
+      </motion.div>
     </div>
   );
 }

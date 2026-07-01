@@ -1,9 +1,29 @@
 /* css for report filters below: */
 .report-filters {
   display: flex;
-  gap: 1rem;
+  align-items: flex-end;
+  gap: 0.85rem;
   flex-wrap: wrap;
-  margin-bottom: 1.25rem;
+  background: var(--color-card-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: 0.85rem 1rem;
+  box-shadow: var(--shadow-xs);
+}
+
+.report-filters__label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-family: var(--font-display);
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--color-navy);
+  padding-bottom: 0.55rem;
+}
+
+.report-filters__label svg {
+  color: var(--color-primary);
 }
 
 .filter-group {
@@ -13,24 +33,51 @@
 }
 
 .filter-group label {
-  font-size: 0.85rem;
-  font-weight: 600;
-  color: var(--color-text);
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--color-text-light);
 }
 
 .filter-group select {
-  padding: 0.45rem 0.75rem;
-  border: 1px solid var(--color-border);
-  border-radius: 6px;
+  appearance: none;
+  padding: 0.55rem 2.2rem 0.55rem 0.85rem;
+  border: 1px solid var(--color-border-strong);
+  border-radius: var(--radius-md);
   background-color: var(--color-card-bg);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%2364748b' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.75rem center;
   color: var(--color-text);
   font-size: 0.9rem;
+  font-weight: 500;
   cursor: pointer;
   min-width: 150px;
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.filter-group select:hover {
+  border-color: var(--color-primary);
 }
 
 .filter-group select:focus {
   outline: none;
   border-color: var(--color-primary);
-  box-shadow: 0 0 0 2px rgba(232, 118, 10, 0.2);
+  box-shadow: 0 0 0 3px rgba(249, 115, 22, 0.16);
+}
+
+@media (max-width: 520px) {
+  .report-filters {
+    width: 100%;
+  }
+
+  .filter-group {
+    flex: 1;
+  }
+
+  .filter-group select {
+    width: 100%;
+    min-width: 0;
+  }
 }
