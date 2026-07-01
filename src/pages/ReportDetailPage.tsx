@@ -328,7 +328,7 @@ function ReportDetailPage() {
         </div>
       </motion.div>
 
-      {/* Printable flyer — hidden on screen, revealed only by @media print */}
+      {/* Printable flyer - hidden on screen, revealed only by @media print */}
       <div className="report-flyer" aria-hidden="true">
         <div className="flyer-banner">
           <p className="flyer-status">{isLost ? 'Lost Pet' : 'Found Pet'}</p>

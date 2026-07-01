@@ -19,7 +19,7 @@ function readStoredTheme(): ThemeChoice {
       return value;
     }
   } catch {
-    // localStorage unavailable — fall back to system
+    // localStorage unavailable - fall back to system
   }
   return 'system';
 }

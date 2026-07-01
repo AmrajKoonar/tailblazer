@@ -100,7 +100,7 @@
   box-shadow: 0 12px 30px rgba(249, 115, 22, 0.34);
 }
 
-/* On mobile the bottom navigation takes over — keep the header compact */
+/* On mobile the bottom navigation takes over - keep the header compact */
 @media (max-width: 768px) {
   .header-content {
     height: 58px;
