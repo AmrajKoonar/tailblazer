@@ -116,7 +116,7 @@ All app variables are prefixed with `VITE_`, which means Vite **inlines them int
 
 ---
 
-## AI Documentation
+## AI Documentation (V1 only)
 
 AI was partially used on this website for the following uses:
 - Debugging (TS files, CSS files, etc)
@@ -132,6 +132,6 @@ All final code including file structure, CSS styling, TypeScript logic, and desi
 
 ---
 
-### Reflection
+### Reflection (V1 only)
 
 AI-assisted development significantly accelerated the initial scaffolding and boilerplate creation process. I was specifically struggling on getting started on this project, where to begin, how to begin, and that left me lost and stressed. AI was also helpful for setting up TypeScript interfaces (.ts and .tsx file code), structuring the service layer, and writing consistent CSS (.css files). However, my own judgment and review was still important for making architectural decisions, ensuring the code met specific assignment requirements, and verifying that the final product worked correctly end-to-end. In conclusion, I learned that AI tools work best as a productivity multiplier and UI designer when the developer understands what the generated code is doing and can verify its correctness. Through this project I was able to experiment and play around with AI which allowed me learn this and help finalize this project!
