@@ -63,7 +63,18 @@ export interface JsonBinReadResponse {
   };
 }
 
+export enum SortOption {
+  NewestFirst = 'newest',
+  OldestFirst = 'oldest',
+  NameAsc = 'name-asc',
+  NameDesc = 'name-desc',
+  LostFirst = 'lost-first',
+  FoundFirst = 'found-first',
+}
+
 export interface FilterState {
   animalType: AnimalType | 'all';
   status: ReportStatus | 'all';
+  search: string;
+  sort: SortOption;
 }

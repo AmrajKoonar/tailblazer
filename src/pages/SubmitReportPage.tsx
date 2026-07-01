@@ -1,4 +1,4 @@
-import { useState, useEffect, FormEvent } from 'react';
+import { useState, useEffect, useRef, FormEvent } from 'react';
 import { motion } from 'framer-motion';
 import { MapContainer, TileLayer, Marker, useMapEvents } from 'react-leaflet';
 import { LeafletMouseEvent } from 'leaflet';
@@ -10,10 +10,13 @@ import {
   AlertCircle,
   CheckCircle2,
   Info,
+  Save,
+  Trash2,
 } from 'lucide-react';
 import { AnimalType, ReportFormData } from '../models';
 import { useSubmitReport } from '../hooks/useSubmitReport';
 import { useGeocoding } from '../hooks/useGeocoding';
+import { loadDraft, saveDraft, clearDraft, isDraftMeaningful, ReportDraft } from '../utils/draftStorage';
 
 function MapClickHandler({ onMapClick }: { onMapClick: (e: LeafletMouseEvent) => void }) {
   useMapEvents({
@@ -40,8 +43,12 @@ function SubmitReportPage() {
   const [form, setForm] = useState<ReportFormData>(INITIAL_FORM);
   const [validationErrors, setValidationErrors] = useState<string[]>([]);
   const [photoPreview, setPhotoPreview] = useState<string | null>(null);
+  const [hasDraft, setHasDraft] = useState(false);
+  const [draftSaved, setDraftSaved] = useState(false);
+  const [draftRestored, setDraftRestored] = useState(false);
+  const draftLoadedRef = useRef(false);
   const { submitReport, submitting, error, success, resetStatus } = useSubmitReport();
-  const { address, loading: geocodingLoading, geocode } = useGeocoding();
+  const { address, loading: geocodingLoading, geocode, setAddress } = useGeocoding();
 
   // Manage object URL lifecycle for the photo preview
   useEffect(() => {
@@ -78,6 +85,90 @@ function SubmitReportPage() {
 
   // Keep form address in sync with geocoding result
   const currentAddress = address || form.lastSeenAddress;
+
+  // Restore a saved draft once on mount
+  useEffect(() => {
+    const draft = loadDraft();
+    if (draft && isDraftMeaningful(draft)) {
+      setForm((prev) => ({
+        ...prev,
+        animalName: draft.animalName,
+        animalType: draft.animalType,
+        description: draft.description,
+        contactInfo: draft.contactInfo,
+        lastSeenLat: draft.lastSeenLat,
+        lastSeenLng: draft.lastSeenLng,
+        lastSeenAddress: draft.lastSeenAddress,
+        password: draft.password,
+      }));
+      if (draft.lastSeenAddress) setAddress(draft.lastSeenAddress);
+      setHasDraft(true);
+      setDraftRestored(true);
+    }
+    draftLoadedRef.current = true;
+  }, [setAddress]);
+
+  // Autosave the form to localStorage (debounced), excluding the photo file
+  useEffect(() => {
+    if (!draftLoadedRef.current || success) return;
+
+    const draft: ReportDraft = {
+      animalName: form.animalName,
+      animalType: form.animalType,
+      description: form.description,
+      contactInfo: form.contactInfo,
+      lastSeenLat: form.lastSeenLat,
+      lastSeenLng: form.lastSeenLng,
+      lastSeenAddress: currentAddress,
+      password: form.password,
+    };
+
+    const timer = window.setTimeout(() => {
+      if (isDraftMeaningful(draft)) {
+        saveDraft(draft);
+        setHasDraft(true);
+        setDraftSaved(true);
+        setDraftRestored(false);
+      } else {
+        clearDraft();
+        setHasDraft(false);
+        setDraftSaved(false);
+      }
+    }, 600);
+
+    return () => window.clearTimeout(timer);
+  }, [
+    form.animalName,
+    form.animalType,
+    form.description,
+    form.contactInfo,
+    form.lastSeenLat,
+    form.lastSeenLng,
+    form.password,
+    currentAddress,
+    success,
+  ]);
+
+  // Clear the stored draft once a report is successfully submitted
+  useEffect(() => {
+    if (success) {
+      clearDraft();
+      setHasDraft(false);
+      setDraftSaved(false);
+      setDraftRestored(false);
+    }
+  }, [success]);
+
+  const handleClearDraft = () => {
+    clearDraft();
+    setForm(INITIAL_FORM);
+    setValidationErrors([]);
+    setAddress('');
+    setPhotoPreview(null);
+    setHasDraft(false);
+    setDraftSaved(false);
+    setDraftRestored(false);
+  };
 
   const validate = (): string[] => {
     const errors: string[] = [];
@@ -167,6 +258,20 @@ function SubmitReportPage() {
         {error && (
           <div className="error-message" role="alert">
             {error}
+          </div>
+        )}
+
+        {hasDraft && (
+          <div className="draft-bar" role="status">
+            <span className="draft-bar__status">
+              <Save size={15} />
+              {draftRestored && !draftSaved
+                ? 'Draft restored — we saved your earlier progress'
+                : 'Draft saved automatically'}
+            </span>
+            <button type="button" className="draft-bar__clear" onClick={handleClearDraft}>
+              <Trash2 size={14} /> Clear draft
+            </button>
           </div>
         )}
 

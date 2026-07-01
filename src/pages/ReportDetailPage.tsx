@@ -12,10 +12,13 @@ import {
   CheckCircle2,
   Lock,
   SearchX,
+  Share2,
+  Printer,
 } from 'lucide-react';
 import { AnimalReport, ReportStatus } from '../models';
 import { fetchReports, saveReports } from '../services/jsonBinService';
 import { formatDate } from '../utils/formatDate';
+import './ReportDetailPage.css';
 
 /* code for report detail page below: */
 function ReportDetailPage() {
@@ -30,6 +33,7 @@ function ReportDetailPage() {
   const [markError, setMarkError] = useState<string | null>(null);
   const [marking, setMarking] = useState(false);
   const [markSuccess, setMarkSuccess] = useState(false);
+  const [shareMsg, setShareMsg] = useState<string | null>(null);
 
   const loadReport = useCallback(async () => {
     try {
@@ -88,6 +92,56 @@ function ReportDetailPage() {
     }
   };
 
+  const buildShareText = (r: AnimalReport, url: string): { title: string; text: string; url: string } => {
+    const statusWord = r.status === ReportStatus.Lost ? 'lost' : 'found';
+    const place = r.lastSeenAddress ? ` last seen near ${r.lastSeenAddress}` : '';
+    const title = `${r.status === ReportStatus.Lost ? 'Help find' : 'Found'} ${r.animalName} on TailBlazer`;
+    const text = `${
+      r.status === ReportStatus.Lost ? 'Help find' : 'Update on'
+    } ${r.animalName}, a ${statusWord} ${r.animalType.toLowerCase()}${place}. View the report here: ${url}`;
+    return { title, text, url };
+  };
+
+  const handleShare = async () => {
+    if (!report) return;
+    const url = window.location.href;
+    const shareData = buildShareText(report, url);
+
+    // Prefer the native Web Share API when available
+    if (navigator.share) {
+      try {
+        await navigator.share(shareData);
+        return;
+      } catch {
+        // User cancelled or share failed — fall through to clipboard
+      }
+    }
+
+    // Fallback: copy the report URL to the clipboard
+    try {
+      if (navigator.clipboard?.writeText) {
+        await navigator.clipboard.writeText(url);
+      } else {
+        const temp = document.createElement('textarea');
+        temp.value = url;
+        temp.style.position = 'fixed';
+        temp.style.opacity = '0';
+        document.body.appendChild(temp);
+        temp.select();
+        document.execCommand('copy');
+        document.body.removeChild(temp);
+      }
+      setShareMsg('Report link copied to clipboard!');
+    } catch {
+      setShareMsg('Could not copy link. You can copy it from the address bar.');
+    }
+    window.setTimeout(() => setShareMsg(null), 3500);
+  };
+
+  const handlePrint = () => {
+    window.print();
+  };
+
   if (loading) {
     return (
       <div className="page-container">
@@ -125,6 +179,21 @@ function ReportDetailPage() {
       <Link to="/" className="back-link">
         <ArrowLeft size={17} /> Back to all reports
       </Link>
+
+      <div className="detail-actions">
+        <button className="btn btn-secondary" onClick={handleShare}>
+          <Share2 size={17} /> Share
+        </button>
+        <button className="btn btn-secondary" onClick={handlePrint}>
+          <Printer size={17} /> Print Flyer
+        </button>
+      </div>
+
+      {shareMsg && (
+        <div className="share-toast" role="status">
+          <CheckCircle2 size={16} /> {shareMsg}
+        </div>
+      )}
 
       <motion.div
         className="detail-card"
@@ -258,6 +327,41 @@ function ReportDetailPage() {
           )}
         </div>
       </motion.div>
+
+      {/* Printable flyer — hidden on screen, revealed only by @media print */}
+      <div className="report-flyer" aria-hidden="true">
+        <div className="flyer-banner">
+          <p className="flyer-status">{isLost ? 'Lost Pet' : 'Found Pet'}</p>
+          <p className="flyer-subtitle">Please help reunite this pet with their family</p>
+        </div>
+        <p className="flyer-name">{report.animalName}</p>
+        {report.photoUrl && !imgError && (
+          <img src={report.photoUrl} alt={report.animalName} className="flyer-photo" />
+        )}
+        <div className="flyer-details">
+          <p>
+            <strong>Animal type:</strong> {report.animalType}
+          </p>
+          <p>
+            <strong>Status:</strong> {isLost ? 'Lost' : 'Found'}
+          </p>
+          <p>
+            <strong>Description:</strong> {report.description}
+          </p>
+          <p>
+            <strong>Last seen:</strong> {report.lastSeenAddress}
+          </p>
+          <p>
+            <strong>Date reported:</strong> {formatDate(report.datePosted)}
+          </p>
+        </div>
+        <div className="flyer-contact">
+          If you have any information, please contact: {report.contactInfo}
+        </div>
+        <div className="flyer-footer">
+          Reported via TailBlazer · {window.location.href}
+        </div>
+      </div>
     </div>
   );
 }

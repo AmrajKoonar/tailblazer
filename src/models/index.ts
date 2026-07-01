@@ -1,4 +1,4 @@
-export { AnimalType, ReportStatus } from './AnimalReport';
+export { AnimalType, ReportStatus, SortOption } from './AnimalReport';
 export type {
   AnimalReport,
   ReportFormData,
