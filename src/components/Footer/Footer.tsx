@@ -33,7 +33,7 @@ function Footer() {
             rel="noopener noreferrer"
             className="footer-link footer-github-link"
           >
-            <img src="/github_icon.png" alt="" className="footer-github-icon" aria-hidden="true" />
+            <img src={`${import.meta.env.BASE_URL}github_icon.png`} alt="" className="footer-github-icon" aria-hidden="true" />
             GitHub
           </a>
         </div>

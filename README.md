@@ -82,6 +82,33 @@ npm run preview
 
 ---
 
+## Deployment (GitHub Pages)
+
+The app is deployed as a static Vite build to GitHub Pages via GitHub Actions.
+
+- **Live URL:** https://amrajkoonar.github.io/tailblazer/
+- **Trigger:** every push to the `main` branch (and manual runs via the Actions tab → *Deploy to GitHub Pages* → *Run workflow*).
+- **Workflow:** [`.github/workflows/deploy.yml`](.github/workflows/deploy.yml) runs `npm ci`, `npm run build`, then uploads `dist/` and deploys with the official GitHub Pages actions.
+- **Base path:** `vite.config.ts` sets `base: "/tailblazer/"` and the router uses `basename={import.meta.env.BASE_URL}` so assets and client-side routes work under `/tailblazer/`.
+- **SPA fallback:** the `postbuild` step copies `dist/index.html` to `dist/404.html`, so refreshing or directly opening a nested route (e.g. `/tailblazer/reports/:id`) still loads the app.
+
+### One-time GitHub setup
+
+1. In the repo, go to **Settings → Pages → Build and deployment** and set **Source** to **GitHub Actions**.
+2. Add the build-time environment variables under **Settings → Secrets and variables → Actions → New repository secret**:
+   - `VITE_IMGBB_API_KEY`
+   - `VITE_JSONBIN_BIN_ID`
+   - `VITE_JSONBIN_API_KEY`
+
+   Note: unlike the local `.env`, GitHub secret values are stored raw — do **not** escape `$` characters in the JSONBin key.
+3. Push to `main` (or run the workflow manually) to trigger the first deployment.
+
+### Environment variable note
+
+All app variables are prefixed with `VITE_`, which means Vite **inlines them into the client bundle at build time**. They are therefore publicly visible in the deployed frontend — this is expected for a fully client-side app. Do not put anything that must stay private in `VITE_` variables. The real `.env` file is git-ignored and is never committed; only `.env_example` is tracked.
+
+---
+
 ## Limitations / Known Issues
 
 - JSONBin free tier has rate limits; rapid successive writes may occasionally conflict.
