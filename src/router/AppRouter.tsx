@@ -7,7 +7,7 @@ import { Footer } from '../components/Footer';
 
 function AppRouter() {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename={import.meta.env.BASE_URL}>
       <div className="app-layout">
         <Header />
         <main className="main-content">

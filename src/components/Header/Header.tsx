@@ -15,7 +15,7 @@ function Header() {
     >
       <div className="header-content">
         <Link to="/" className="header-logo">
-          <img src="/paw.png" alt="TailBlazer logo" className="logo-icon" />
+          <img src={`${import.meta.env.BASE_URL}paw.png`} alt="TailBlazer logo" className="logo-icon" />
           <span className="logo-text">
             <span className="logo-tail">Tail</span>Blazer
           </span>
